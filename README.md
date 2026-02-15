@@ -1,19 +1,27 @@
-# kani-solana
+**kani-solana**
 
-Reusable Kani harnesses for Solana protocol math: bounds, value conservation, monotonicity, and Percolator-style risk primitives (haircut ratio and profit haircut math).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Everything is gated behind `cfg(kani)`, so normal builds are unaffected.
+Reusable, zero-overhead Kani proof harnesses for core mathematical invariants in Solana DeFi protocols.
 
-## 30-second Usage
+The crate provides battle-tested harnesses that verify:
+- Bounds and overflow safety
+- Value conservation (no creation or destruction of funds)
+- Monotonicity of state transitions
+- Percolator-style risk primitives: haircut ratio and profit haircut math
 
-Add as a dev dependency:
+All code is gated behind `cfg(kani)`. Normal `cargo build` / `cargo test` builds are completely unaffected — the crate has **zero runtime cost**.
+
+### Quick Start
+
+#### 1. Add as a dev-dependency
 
 ```toml
 [dev-dependencies]
 kani-solana = { git = "https://github.com/kamiyo-ai/kani-solana.git", rev = "a9fc18fe2067c83e4c409fcc50133ea0b05f74ac" }
 ```
 
-Use in your own proofs:
+#### 2. Write a proof (example)
 
 ```rust
 #![cfg(kani)]
@@ -35,7 +43,7 @@ fn payout_is_bounded_by_profit() {
 }
 ```
 
-Run:
+#### 3. Run the proofs
 
 ```bash
 cargo install --locked kani-verifier
@@ -43,6 +51,10 @@ cargo kani setup
 cargo kani
 ```
 
-## License
+### License
 
-MIT
+MIT © kamiyo-ai
+
+---
+
+Ready to drop into any Solana protocol repository that uses formal verification with Kani. Contributions welcome!
